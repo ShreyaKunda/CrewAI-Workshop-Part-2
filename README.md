@@ -47,61 +47,11 @@ By the end of this activity, you should be able to:
 - combine multiple findings into a final report
 - think about evidence, uncertainty, and human validation
 
-## Before You Begin
+## Activity
 
-You need:
+Start by looking at the five scrambled agent cards in the workshop slides.
 
-- Python 3.10–3.13
-- Git
-- Ollama
-- a local Ollama model such as `llama3.2`
-
-Check Ollama:
-
-```bash
-ollama run llama3.2
-```
-
-If Ollama is already running, this command will simply use the existing Ollama service.
-
-## Setup
-
-Clone the repository:
-
-```bash
-git clone https://github.com/ShreyaKunda/CrewAI-Workshop-Part-2.git
-cd CrewAI-Workshop-Part-2
-```
-
-Create a virtual environment:
-
-```bash
-python -m venv .venv
-```
-
-Activate it on Windows:
-
-```bash
-.venv\Scripts\activate
-```
-
-Activate it on macOS/Linux:
-
-```bash
-source .venv/bin/activate
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-## The Activity
-
-Before editing the code, look at the five scrambled agent cards in the workshop slides.
-
-Your first task is to decide which card belongs in each position in the workflow.
+Decide which agent belongs in each position in the investigation workflow.
 
 Then open `main.py` and complete the TODO sections.
 
@@ -219,7 +169,6 @@ A useful rule:
 ```text
 CrewAI-Workshop-Part-2/
 ├── README.md
-├── requirements.txt
 ├── .gitignore
 ├── main.py
 ├── data/
@@ -230,40 +179,6 @@ CrewAI-Workshop-Part-2/
     └── main.py
 ```
 
-## Student vs Solution
+`main.py` contains intentional TODOs for the workshop. `solution/main.py` contains a completed version for comparison after the activity.
 
-`main.py` contains intentional TODOs for the workshop.
-
-`solution/main.py` contains one completed version that can be used after the activity for comparison or instructor demonstration.
-
-Try to complete `main.py` yourself before looking at the solution.
-
-## Troubleshooting
-
-### Ollama connection error
-
-Make sure Ollama is installed and the model is available:
-
-```bash
-ollama run llama3.2
-```
-
-### Port 11434 is already in use
-
-That usually means Ollama is already running. You do not need to start another `ollama serve` process.
-
-### Python version problems
-
-Use the Python interpreter from your `.venv`. Python 3.11 is recommended for the workshop if you encounter package compatibility issues.
-
-### Output looks strange
-
-Local models can produce imperfect results. That is part of the exercise. Inspect whether the agents followed their instructions and whether their conclusions are actually supported by the incident data.
-
-## Workshop Philosophy
-
-The goal is not to create the most complicated agent system.
-
-The goal is to understand how to break a problem into specialized responsibilities and design a workflow in which agents exchange useful information.
-
-**Think about the workflow first. Then write the agents.**
+The setup and environment preparation are covered in Part 1, so this repository does not repeat those instructions.
