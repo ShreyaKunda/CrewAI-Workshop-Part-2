@@ -6,14 +6,6 @@ In Part 2, you will build a small **AI incident investigation team** using CrewA
 
 The application structure is already provided. Your job is to decide what each specialist should do, how the agents should collaborate, and what evidence they should use.
 
-## Setup
-
-Part 2 uses the same Python/CrewAI/Ollama environment as Part 1.
-
-If you have not completed the setup yet, follow the detailed **[Part 1 Installation Guide](https://github.com/ShreyaKunda/CrewAI-Workshop-Part-1/blob/main/INSTALLATION.md)** first.
-
-You do not need a separate API key or additional paid model provider for Part 2.
-
 ## What You Will Build
 
 A five-agent investigation workflow:
@@ -57,6 +49,8 @@ By the end of this activity, you should be able to:
 
 ## Run the Application
 
+Make sure your Part 1 CrewAI/Ollama environment is already set up.
+
 After completing the TODOs:
 
 ```bash
@@ -86,4 +80,4 @@ CrewAI-Workshop-Part-2/
 
 `main.py` contains intentional TODOs for the workshop. `solution/main.py` contains a completed version for comparison after the activity.
 
-The setup and environment preparation are covered in Part 1, so this repository does not repeat those instructions.
+Part 2 assumes the Python, CrewAI, and Ollama setup from Part 1 and does not repeat installation instructions.
