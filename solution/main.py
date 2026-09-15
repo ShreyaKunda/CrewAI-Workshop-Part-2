@@ -28,8 +28,8 @@ data_text = "\n".join(str(row) for row in incident_data)
 
 incident_manager = Agent(
     role="Incident Manager",
-    goal="Understand the incident, organize the investigation, and identify the key areas that need to be investigated.",
-    backstory="You are an experienced incident manager who coordinates technical investigations and keeps investigations focused on evidence.",
+    goal="Understand the incident, establish the investigation scope, and identify the key areas that need to be investigated.",
+    backstory="You are an experienced incident manager who establishes a clear incident overview and keeps the investigation focused on evidence.",
     llm=llm,
     verbose=True
 )
