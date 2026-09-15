@@ -1,5 +1,15 @@
 from crewai import Agent, Task, Crew, LLM
 import csv
+from pathlib import Path
+
+
+# Always resolve paths relative to the repository root.
+# This lets students run the solution from either the project root
+# or from inside the solution/ directory.
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_FILE = BASE_DIR / "data" / "incident_data.csv"
+OUTPUT_DIR = BASE_DIR / "output"
+OUTPUT_FILE = OUTPUT_DIR / "incident_report.md"
 
 
 llm = LLM(
@@ -8,7 +18,7 @@ llm = LLM(
 )
 
 
-with open("data/incident_data.csv", newline="", encoding="utf-8") as file:
+with open(DATA_FILE, newline="", encoding="utf-8") as file:
     incident_data = list(csv.DictReader(file))
 
 data_text = "\n".join(str(row) for row in incident_data)
@@ -167,8 +177,9 @@ crew = Crew(
 
 result = crew.kickoff()
 
-with open("output/incident_report.md", "w", encoding="utf-8") as file:
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+with open(OUTPUT_FILE, "w", encoding="utf-8") as file:
     file.write(str(result))
 
 print("\nInvestigation complete.")
-print("Report saved to: output/incident_report.md")
+print(f"Report saved to: {OUTPUT_FILE.relative_to(BASE_DIR)}")
