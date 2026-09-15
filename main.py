@@ -1,5 +1,6 @@
 from crewai import Agent, Task, Crew, LLM
 import csv
+from pathlib import Path
 
 
 # ---------------------------------------------------------
@@ -15,8 +16,15 @@ llm = LLM(
 # ---------------------------------------------------------
 # 2. Load the incident data
 # ---------------------------------------------------------
+# Resolve paths relative to the repository root so the script works
+# whether it is run from the repo root or from another directory.
 
-with open("data/incident_data.csv", newline="", encoding="utf-8") as file:
+BASE_DIR = Path(__file__).resolve().parent
+DATA_FILE = BASE_DIR / "data" / "incident_data.csv"
+OUTPUT_DIR = BASE_DIR / "output"
+OUTPUT_FILE = OUTPUT_DIR / "incident_report.md"
+
+with open(DATA_FILE, newline="", encoding="utf-8") as file:
     incident_data = list(csv.DictReader(file))
 
 data_text = "\n".join(str(row) for row in incident_data)
@@ -89,11 +97,14 @@ log_analysis_task = Task(
     async_execution=True
 )
 
+# This task runs in parallel with log_analysis_task.
+# Because both tasks are asynchronous, it cannot depend on the other async task.
+# Use the incident overview and raw incident data instead.
 technical_task = Task(
     description="TODO",
     expected_output="TODO",
     agent=technical_investigator,
-    context=[incident_task, log_analysis_task],
+    context=[incident_task],
     async_execution=True
 )
 
@@ -146,8 +157,9 @@ result = crew.kickoff()
 # 7. Save the final report
 # ---------------------------------------------------------
 
-with open("output/incident_report.md", "w", encoding="utf-8") as file:
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+with open(OUTPUT_FILE, "w", encoding="utf-8") as file:
     file.write(str(result))
 
 print("\nInvestigation complete.")
-print("Report saved to: output/incident_report.md")
+print(f"Report saved to: {OUTPUT_FILE.relative_to(BASE_DIR)}")
