@@ -4,8 +4,6 @@ from pathlib import Path
 
 
 # Always resolve paths relative to the repository root.
-# This lets students run the solution from either the project root
-# or from inside the solution/ directory.
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_FILE = BASE_DIR / "data" / "incident_data.csv"
 OUTPUT_DIR = BASE_DIR / "output"
@@ -105,9 +103,17 @@ log_analysis_task = Task(
     async_execution=True
 )
 
+# This task runs in parallel with log_analysis_task.
+# It cannot depend on another asynchronous task, so it uses the incident overview
+# and the raw incident data rather than the Log/Data Analyst's output.
 technical_task = Task(
-    description="""
-    Use the incident overview and data analysis to investigate possible technical causes.
+    description=f"""
+    Use the incident overview and the raw incident data to investigate possible
+    technical causes of the incident.
+
+    INCIDENT DATA:
+    {data_text}
+
     Develop multiple plausible explanations where appropriate, connect each
     explanation to the available evidence, and clearly distinguish evidence
     from assumptions. Do not claim that a cause is confirmed unless the data
@@ -115,7 +121,7 @@ technical_task = Task(
     """,
     expected_output="A technical investigation listing plausible causes, reasoning, supporting evidence, alternative explanations, and uncertainty.",
     agent=technical_investigator,
-    context=[incident_task, log_analysis_task],
+    context=[incident_task],
     async_execution=True
 )
 
