@@ -72,83 +72,41 @@ report_generator = Agent(
 # ---------------------------------------------------------
 # 4. Define the tasks
 # ---------------------------------------------------------
+# Design the investigation workflow.
+# Replace the TODO values in the task descriptions and outputs.
 
 incident_task = Task(
-    description=f"""
-    Review the incident data below and create an initial incident overview.
-
-    INCIDENT DATA:
-    {data_text}
-
-    TODO: Decide what the Incident Manager should establish first.
-    Identify the affected system/component, relevant time period, important
-    status changes, and the main areas that require investigation.
-
-    Do not invent information that is not supported by the data.
-    """,
-    expected_output="TODO: Define the useful output the Incident Manager should provide.",
+    description="TODO",
+    expected_output="TODO",
     agent=incident_manager
 )
 
 log_analysis_task = Task(
-    description=f"""
-    Analyse the incident data below as a data/log specialist.
-
-    INCIDENT DATA:
-    {data_text}
-
-    TODO: Decide which anomalies, trends, status changes, error codes,
-    timing patterns, or changes before the incident should be identified.
-    Support important findings with specific evidence from the data.
-    """,
-    expected_output="TODO: Define the evidence-focused output expected from the data analysis.",
+    description="TODO",
+    expected_output="TODO",
     agent=log_analyst,
     context=[incident_task],
     async_execution=True
 )
 
 technical_task = Task(
-    description="""
-    Use the incident overview and data analysis to investigate possible
-    technical causes of the incident.
-
-    TODO: Decide how this agent should evaluate possible causes, connect
-    technical explanations to the evidence, and distinguish evidence from
-    assumptions.
-
-    Do not claim that a cause is confirmed unless the evidence supports it.
-    """,
-    expected_output="TODO: Define the possible-cause investigation output.",
+    description="TODO",
+    expected_output="TODO",
     agent=technical_investigator,
     context=[incident_task, log_analysis_task],
     async_execution=True
 )
 
 root_cause_task = Task(
-    description="""
-    Review the findings from the investigation agents.
-
-    TODO: Decide how the Root Cause Analyst should compare possible causes,
-    identify the explanation best supported by the evidence, discuss
-    alternatives, and state uncertainty or limitations.
-    """,
-    expected_output="TODO: Define the root-cause analysis output.",
+    description="TODO",
+    expected_output="TODO",
     agent=root_cause_analyst,
     context=[log_analysis_task, technical_task]
 )
 
 report_task = Task(
-    description="""
-    Create a structured technical incident report using the completed
-    investigation findings.
-
-    TODO: Decide which sections the final report should contain. Include
-    evidence, conclusions, recommended actions, and an honest statement of
-    confidence or limitations.
-
-    The report must distinguish observed evidence from assumptions.
-    """,
-    expected_output="TODO: Define the structure and quality requirements for the final report.",
+    description="TODO",
+    expected_output="TODO",
     agent=report_generator,
     context=[incident_task, log_analysis_task, technical_task, root_cause_task]
 )
